@@ -1,4 +1,4 @@
-import { URLS } from '../constants';
+import { URLS } from '../../shared/constants';
 import axios from 'axios';
 import { setupInterceptorsTo } from './interceptors';
 
