@@ -13,32 +13,35 @@ export const useFetchExchangeData = () => {
 
   const pushNotification = useAddNotification();
 
+  const pushFetchCurrNotification = useCallback(
+    (type: NotificationType, text: string) => {
+      pushNotification({
+        type,
+        title: 'Exchange rates',
+        text,
+      });
+    },
+    [pushNotification],
+  );
+
   const fetchCurrData = useCallback(async () => {
     const { data, error } = await get();
     switch (true) {
       case !!error && isAxiosError(error):
-        pushNotification({
-          type: NotificationType.Error,
-          title: 'Exchange rates',
-          text: (error as TExchangeResponseError).response?.data?.errText || error.message,
-        });
+        pushFetchCurrNotification(
+          NotificationType.Error,
+          (error as TExchangeResponseError).response?.data?.errText || error.message,
+        );
         break;
       case !!data:
-        pushNotification({
-          type: NotificationType.Success,
-          title: 'Exchange rates',
-          text: 'Data received successfully',
-        });
+        pushFetchCurrNotification(NotificationType.Success, 'Data received successfully');
         setCurrenciesState(data as TCurrency[]);
         break;
       default:
-        pushNotification({
-          type: NotificationType.Warning,
-          title: 'Exchange rates',
-          text: 'Unknown error occurred',
-        });
+        pushFetchCurrNotification(NotificationType.Warning, 'Unknown error occurred');
+        break;
     }
-  }, [pushNotification, setCurrenciesState]);
+  }, [pushFetchCurrNotification, setCurrenciesState]);
 
   useEffect(() => {
     fetchCurrData();
