@@ -1,16 +1,16 @@
 import type { TCurrencyResponse, TExchangeResponseError, TFullCurrData } from '../../shared/types';
+import { activeRequestsState, exchangeState } from '../atoms';
 import { useCallback, useEffect } from 'react';
 
 import { NotificationType } from '../../shared/enums';
-import { exchangeState } from '../atoms';
 import { get } from '../services';
-import { isAxiosError } from 'axios';
 import { number } from 'currency-codes';
 import { useAddNotification } from './useNotificationHandlers';
 import { useSetRecoilState } from 'recoil';
 
 export const useFetchExchangeData = () => {
   const setCurrenciesState = useSetRecoilState(exchangeState);
+  const setActiveRequests = useSetRecoilState(activeRequestsState);
 
   const pushNotification = useAddNotification();
 
@@ -26,7 +26,9 @@ export const useFetchExchangeData = () => {
   );
 
   const fetchCurrData = useCallback(async () => {
+    setActiveRequests(prev => prev + 1);
     const { data, error } = await get();
+    setActiveRequests(prev => prev - 1);
 
     if (!!error || !data) {
       pushFetchCurrNotification(
@@ -49,10 +51,10 @@ export const useFetchExchangeData = () => {
     });
 
     setCurrenciesState(fullDataCurrencies);
-  }, [pushFetchCurrNotification, setCurrenciesState]);
+  }, [pushFetchCurrNotification, setActiveRequests, setCurrenciesState]);
 
   useEffect(() => {
-    // fetchCurrData();
+    fetchCurrData();
     // only when mounting the component
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

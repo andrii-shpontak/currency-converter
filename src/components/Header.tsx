@@ -3,7 +3,7 @@ import { Link } from '@tanstack/react-router';
 import { TabNav } from '@radix-ui/themes';
 import { filledRadixColors } from '../shared/constants';
 
-export function Header() {
+const Header = () => {
   return (
     <header style={filledRadixColors} className='py-2 px-8 h-12 flex justify-between items-center'>
       <TabNav.Root className='flex gap-4'>
@@ -17,4 +17,6 @@ export function Header() {
       <ExchangeRate />
     </header>
   );
-}
+};
+
+export default Header;
