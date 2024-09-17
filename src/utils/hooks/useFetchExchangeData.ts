@@ -1,10 +1,11 @@
-import type { TCurrency, TExchangeResponseError } from '../../shared/types';
+import type { TCurrencyResponse, TExchangeResponseError, TFullCurrData } from '../../shared/types';
 import { useCallback, useEffect } from 'react';
 
 import { NotificationType } from '../../shared/enums';
 import { exchangeState } from '../atoms';
 import { get } from '../services';
 import { isAxiosError } from 'axios';
+import { number } from 'currency-codes';
 import { useAddNotification } from './useNotificationHandlers';
 import { useSetRecoilState } from 'recoil';
 
@@ -26,25 +27,32 @@ export const useFetchExchangeData = () => {
 
   const fetchCurrData = useCallback(async () => {
     const { data, error } = await get();
-    switch (true) {
-      case !!error && isAxiosError(error):
-        pushFetchCurrNotification(
-          NotificationType.Error,
-          (error as TExchangeResponseError).response?.data?.errText || error.message,
-        );
-        break;
-      case !!data:
-        pushFetchCurrNotification(NotificationType.Success, 'Data received successfully');
-        setCurrenciesState(data as TCurrency[]);
-        break;
-      default:
-        pushFetchCurrNotification(NotificationType.Warning, 'Unknown error occurred');
-        break;
+
+    if (!!error || !data) {
+      pushFetchCurrNotification(
+        NotificationType.Error,
+        (error as TExchangeResponseError).response?.data?.errText || 'Unknown error occurred',
+      );
+      return;
     }
+    pushFetchCurrNotification(NotificationType.Success, 'Data received successfully');
+
+    const filteredCurrencies = (data as TCurrencyResponse[]).filter(
+      curr => Boolean(curr.rateBuy) && Boolean(curr.rateSell),
+    );
+    const fullDataCurrencies = filteredCurrencies.map(curr => {
+      return {
+        ...curr,
+        currencyCodeA: number(String(curr.currencyCodeA)) as TFullCurrData,
+        currencyCodeB: number(String(curr.currencyCodeB)) as TFullCurrData,
+      };
+    });
+
+    setCurrenciesState(fullDataCurrencies);
   }, [pushFetchCurrNotification, setCurrenciesState]);
 
   useEffect(() => {
-    fetchCurrData();
+    // fetchCurrData();
     // only when mounting the component
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

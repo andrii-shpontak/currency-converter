@@ -5,7 +5,7 @@ export const filledRadixColors = {
 
 export const layoutRadixColors = {
   backgroundColor: 'var(--color-panel-solid)',
-  color: 'var(--accent-11)',
+  color: 'var(--accent-contrast)',
 };
 
 export const borderRadixColor = {

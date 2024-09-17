@@ -11,7 +11,7 @@ import { useFetchExchangeData } from '../utils/hooks';
 export const Layout: React.FC<ILayoutProps> = ({ children }) => {
   useFetchExchangeData();
   return (
-    <Theme accentColor='yellow'>
+    <Theme accentColor='yellow' appearance='inherit'>
       <Box className='min-h-screen'>
         <Header />
         <main

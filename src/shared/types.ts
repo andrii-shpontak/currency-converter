@@ -33,9 +33,25 @@ export type TNotificationProvider = {
   handleClose: (n: TNotification) => void;
 };
 
-export type TCurrency = {
+export type TCurrencyResponse = {
   currencyCodeA: number;
   currencyCodeB: number;
+  date: number;
+  rateBuy: number;
+  rateSell: number;
+};
+
+export type TFullCurrData = {
+  code: string;
+  countries: string[];
+  currency: string;
+  digits: number;
+  number: string;
+};
+
+export type TCurrency = {
+  currencyCodeA: TFullCurrData;
+  currencyCodeB: TFullCurrData;
   date: number;
   rateBuy: number;
   rateSell: number;
