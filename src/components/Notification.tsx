@@ -25,7 +25,7 @@ const Notification = () => {
   }, [handleClose, state]);
 
   return (
-    <div className='fixed flex bottom-0 right-0 flex-col-reverse gap-4 z-0 h-0'>
+    <div className='fixed flex bottom-5 right-5 flex-col-reverse gap-4 z-0 h-0'>
       {state.notifications.map((notification, i) => (
         <NotificationProvider notification={notification} handleClose={handleClose} key={i} />
       ))}
