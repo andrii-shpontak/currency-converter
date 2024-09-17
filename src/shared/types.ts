@@ -65,3 +65,21 @@ export type TExchangeResponseError = {
   };
   message: string;
 };
+
+export type TConverterValues = {
+  a: { selectValue: string; inputValue: string };
+  b: { selectValue: string; inputValue: string };
+};
+
+export type TCustomSelectProps = {
+  value: string;
+  onChange: (value: string, key: keyof TConverterValues) => void;
+  items: string[];
+  selectId: keyof TConverterValues;
+};
+
+export type TUseConverterHandlersProps = {
+  exchangeData: TCurrency[] | null;
+  converterValues: TConverterValues;
+  setConverterValues: React.Dispatch<React.SetStateAction<TConverterValues>>;
+};

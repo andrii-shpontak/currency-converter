@@ -11,14 +11,12 @@ import { useFetchExchangeData } from '../utils/hooks';
 export const Layout: React.FC<ILayoutProps> = ({ children }) => {
   useFetchExchangeData();
   return (
-    <Theme accentColor='yellow' appearance='inherit'>
+    <Theme accentColor='cyan' appearance='inherit'>
       <Box className='min-h-screen'>
         <Header />
         <main
           style={layoutRadixColors}
           className='flex flex-col items-center justify-center py-6 px-4 h-[calc(100vh-3rem)]'>
-          {/* {true ? */}
-          {/* <Loader /> */}
           {children}
         </main>
       </Box>

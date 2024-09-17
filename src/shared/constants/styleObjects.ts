@@ -11,3 +11,5 @@ export const layoutRadixColors = {
 export const borderRadixColor = {
   borderColor: 'var(--accent-9)',
 };
+
+// export const svgFillColor = {};

@@ -1,6 +1,6 @@
-import { Heading } from '@radix-ui/themes';
+import MainPage from '../pages/MainPage';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/')({
-  component: () => <Heading>Main page</Heading>,
+  component: MainPage,
 });
