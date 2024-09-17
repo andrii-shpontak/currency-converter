@@ -1,5 +1,6 @@
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 
+import { RecoilRoot } from 'recoil';
 import { routeTree } from '../routeTree.gen';
 
 const router = createRouter({ routeTree });
@@ -11,7 +12,11 @@ declare module '@tanstack/react-router' {
 }
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <RecoilRoot>
+      <RouterProvider router={router} />
+    </RecoilRoot>
+  );
 };
 
 export default App;

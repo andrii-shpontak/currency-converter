@@ -14,7 +14,8 @@ const NotificationProvider = ({ notification, handleClose }: TNotificationProvid
   }, [notification, handleClose]);
 
   return (
-    <div className={`relative p-2 pr-4 pb-4 rounded text-white text-base z-[9999] ${notification.type}`}>
+    <div
+      className={`relative p-2 pr-4 pb-4 rounded text-white text-base z-[9999] notificationItem ${notification.type}`}>
       <div className='absolute right-2 top-0 text-2xl cursor-pointer' onClick={handleClick}>
         &times;
       </div>

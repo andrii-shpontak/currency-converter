@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.notificationItem {
+  &.warning {
+    background-color: #e4dd00;
+    color: #2c2c2e;
+  }
+  &.success {
+    background-color: #4fae00;
+    color: #fff;
+  }
+  &.error {
+    background-color: #be1000;
+    color: #fff;
+  }
+}

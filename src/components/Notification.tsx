@@ -1,5 +1,3 @@
-import './Notification.scss';
-
 import { TNotification, TNotificationState } from '../shared/types';
 import { useCallback, useEffect } from 'react';
 

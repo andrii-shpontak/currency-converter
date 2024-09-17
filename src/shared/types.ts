@@ -32,3 +32,20 @@ export type TNotificationProvider = {
   notification: TNotification;
   handleClose: (n: TNotification) => void;
 };
+
+export type TCurrency = {
+  currencyCodeA: number;
+  currencyCodeB: number;
+  date: number;
+  rateBuy: number;
+  rateSell: number;
+};
+
+export type TExchangeResponseError = {
+  response?: {
+    data?: {
+      errText?: string;
+    };
+  };
+  message: string;
+};

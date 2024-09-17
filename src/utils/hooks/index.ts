@@ -1,2 +1,2 @@
 export * from './useNotificationHandlers';
-export * from './useHeaderData';
+export * from './useFetchExchangeData';
