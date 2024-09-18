@@ -1,50 +1,40 @@
-# React + TypeScript + Vite
+# Currency Converter Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## React + TypeScript + Vite
 
-Currently, two official plugins are available:
+See a preview: [DEMO LINK](https://andrii-shpontak.github.io/currency-converter/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Overview
+This project is a React-based currency converter application with a customizable theme. It features a header with navigation, current exchange rates, and a currency selector.
 
-## Expanding the ESLint configuration
+## Features
+- **Header**:
+  - Navigation menu
+  - Display of selected currency exchange rate (buy/sell)
+  - Currency selector (default: USD)
+- **Pages**:
+  1. Main page with currency converter component
+  2. Customization page with Radix UI theme settings
+- **Currency Data**:
+  - Fetched from Monobank's open API
+  - Filtered to include only USD-UAH, EUR-UAH, and USD-EUR rates  (buy/sell)
+- **Routing**: 
+  - Implemented using Tan Stack Router
+  - Redirect from non-existent routes
+- **State Management**: 
+  - Recoil for state management
+  - Recoil-persist to prevent data loss on page refresh (due to API request limits)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technology Stack
+- **Framework**: React with Vite
+- **Routing**: Tan Stack Router
+- **API Requests**: Axios (with mock interceptors)
+- **State Management**: Recoil + recoil-persist
+- **UI Components**: Radix UI
+- **Styling**: Tailwind CSS
 
-- Configure the top-level `parserOptions` property like this:
+## API Integration
+The application uses the open API of Monobank to receive currency rates (we have a notification after the result of each request). Note that there are limits on the number of requests per minute I used recoil-persist to prevent data loss when refreshing the page.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Customization
+The Customization page includes a stock theme configuration component from Radix UI, allowing users to adjust the application's appearance.
